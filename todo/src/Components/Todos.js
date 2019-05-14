@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { addTodo, toggleTodo, deleteTodo} from '../Actions'
+import { addTodo, toggleTodo, deleteTodo } from '../Actions'
 
 
 class Todos extends React.Component {
@@ -22,6 +22,10 @@ class Todos extends React.Component {
         this.props.toggleTodo(id);
     }
 
+    deleteTodo = () => {
+        this.props.deleteTodo();
+    }
+
     render() {
         return (
             <div className='app'>
@@ -30,11 +34,12 @@ class Todos extends React.Component {
                         <h4 onClick={() => this.toggleTodo(todo.id)} key={todo.id}>
                             {todo.name}
                             {todo.completed && <i class="fas fa-check-square"></i>}
-                            <i class="fas fa-trash-alt"></i>
                         </h4>
                     ))
                     }
+                    <button onClick={() => this.deleteTodo()}><i class="fas fa-trash-alt"></i></button>
                 </div>
+
                 <input
                     type='text'
                     value={this.state.newTodo}
@@ -56,5 +61,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { addTodo, toggleTodo, deleteTodo}
+    { addTodo, toggleTodo, deleteTodo }
 )(Todos)

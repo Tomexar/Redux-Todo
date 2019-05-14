@@ -1,8 +1,8 @@
-import {ADD_TODO, TOGGLE_COMPLETED, DELETE_TODO} from '../Actions';
+import { ADD_TODO, TOGGLE_COMPLETED, DELETE_TODO } from '../Actions';
 
 const initialState = {
     todos: [
-        { name: 'Clean Room', completed : false, id: Math.random}
+        { name: 'Clean Room', completed: false, id: Math.random }
     ]
 }
 
@@ -33,17 +33,9 @@ function reducer(state = initialState, action) {
                 })
             };
 
-        // case DELETE_TODO:
-        //     return {
-        //         ...state,
-        //         todos: state.todos.map(todo =>{
-        //             if(todo.id === action.payload){
-        //                 return {
-        //                     state.todo.filter(todo =>!todo.id)
-        //                 }
-        //             }
-        //         })
-        //     }
+        case DELETE_TODO:
+            return state.todos.filter(todo => !todo.completed)
+
         default:
             return state;
     }

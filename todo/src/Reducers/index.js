@@ -2,7 +2,7 @@ import { ADD_TODO, TOGGLE_COMPLETED, DELETE_TODO } from '../Actions';
 
 const initialState = {
     todos: [
-        { name: 'Clean Room', completed: false, id: Math.random }
+        { name: 'Clean Room', completed: false, id: Math.random() }
     ]
 }
 
@@ -13,7 +13,7 @@ function reducer(state = initialState, action) {
                 ...state,
                 todos: [
                     ...state.todos,
-                    { name: action.payload, completed: false }
+                    { name: action.payload, completed: false, id: Date.now() }
                 ]
 
             }
@@ -34,7 +34,10 @@ function reducer(state = initialState, action) {
             };
 
         case DELETE_TODO:
-            return state.todos.filter(todo => !todo.completed)
+            return {
+                ...state,
+                todos : state.todos.filter(todo => !todo.completed)
+            }
 
         default:
             return state;
